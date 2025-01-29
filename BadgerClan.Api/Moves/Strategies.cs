@@ -30,17 +30,10 @@ public static class Strategies
 
         }
     }
-    public static void Turtle(MoveRequest request, List<Move> moves)
+    public static void RunAway(MoveRequest request, List<Move> moves)
     {
-
         var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
         var squad = request.Units.Where(u => u.Team == request.YourTeamId);
-
-        if (!squad.Any() || !enemies.Any()) return;
-
-        var avgX = (int)squad.Average(u => u.Location.Row);
-        var avgY = (int)squad.Average(u => u.Location.Col);
-        var gatheringPoint = new Coordinate(avgX, avgY);
 
         foreach (var unit in squad)
         {
@@ -49,16 +42,7 @@ public static class Strategies
             {
                 var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
 
-                var towardGathering = unit.Location.Toward(gatheringPoint);
-
-                if (awayFromEnemy.Distance(closestEnemy.Location) > towardGathering.Distance(closestEnemy.Location))
-                {
-                    moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
-                }
-                else
-                {
-                    moves.Add(new Move(MoveType.Walk, unit.Id, towardGathering));
-                }
+                moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
             }
         }
     }

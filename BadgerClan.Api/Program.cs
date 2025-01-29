@@ -37,10 +37,10 @@ app.MapGet("/DoNothing", (HttpContext context) =>
     Strategies.Strategy = "";
 });
 
-app.MapGet("/Turtle", (HttpContext context) =>
+app.MapGet("/RunAway", (HttpContext context) =>
 {
-    app.Logger.LogInformation("Received Turtle Request");
-    Strategies.Strategy = "turtle";
+    app.Logger.LogInformation("Received Run Away Request");
+    Strategies.Strategy = "runaway";
 });
 
 
@@ -54,8 +54,8 @@ app.MapPost("/", (MoveRequest request) =>
         case "runandgun":
             Strategies.RunAndGun(request, moves);
             break;
-        case "turtle":
-            Strategies.Turtle(request, moves);
+        case "runaway":
+            Strategies.RunAway(request, moves);
             break;
         default:
             app.Logger.LogInformation("No strategie chose.");
