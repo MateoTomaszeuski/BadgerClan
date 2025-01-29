@@ -37,8 +37,8 @@
 
 
             <Button
-                Text="Turtle" 
-                Command="{Binding ActivateTurtleCommand}"
+                Text="Run Away" 
+                Command="{Binding ActivateRunAwayCommand}"
                 HorizontalOptions="Fill" >
                 <Button.Triggers>
                     <DataTrigger

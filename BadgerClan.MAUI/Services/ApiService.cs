@@ -31,13 +31,13 @@ public class ApiService(IHttpClientFactory factory) : IApiService
         else return "";
     }
 
-    public async Task<string> ActivateTurtle()
+    public async Task<string> ActivateRunAway()
     {
         HttpClient client = factory.CreateClient("ControllerApi");
 
-        var response = await client.GetAsync("/Turtle");
+        var response = await client.GetAsync("/RunAway");
         if (response.IsSuccessStatusCode)
-            return "Turtle";
+            return "RunAway";
         else return "";
     }
 }

@@ -28,8 +28,8 @@ public partial class MainPageViewModel : ObservableObject
         ActiveMode = await apiService.ActivateDoNothing();
     }
     [RelayCommand]
-    public async Task ActivateTurtle()
+    public async Task ActivateRunAway()
     {
-        ActiveMode = await apiService.ActivateTurtle();
+        ActiveMode = await apiService.ActivateRunAway();
     }
 }
