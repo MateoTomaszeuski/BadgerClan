@@ -32,35 +32,31 @@ public static class Strategies
     }
     public static void Turtle(MoveRequest request, List<Move> moves)
     {
-
         var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
         var squad = request.Units.Where(u => u.Team == request.YourTeamId);
 
         if (!squad.Any() || !enemies.Any()) return;
 
-        // Choose a gathering point: The average position of all friendly units
         var avgX = (int)squad.Average(u => u.Location.Row);
         var avgY = (int)squad.Average(u => u.Location.Col);
         var gatheringPoint = new Coordinate(avgX, avgY);
+
+        bool isGathered = squad.All(u => u.Location.Distance(gatheringPoint) <= 2);
 
         foreach (var unit in squad)
         {
             var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
             if (closestEnemy != null)
             {
-                // Move away from the enemy
-                var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
-
-                // Move toward the gathering point, but not if it means getting closer to the enemy
-                var towardGathering = unit.Location.Toward(gatheringPoint);
-
-                if (awayFromEnemy.Distance(closestEnemy.Location) > towardGathering.Distance(closestEnemy.Location))
+                if (!isGathered)
                 {
-                    moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
+                    var towardGathering = unit.Location.Toward(gatheringPoint);
+                    moves.Add(new Move(MoveType.Walk, unit.Id, towardGathering));
                 }
                 else
                 {
-                    moves.Add(new Move(MoveType.Walk, unit.Id, towardGathering));
+                    var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
+                    moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
                 }
             }
         }
