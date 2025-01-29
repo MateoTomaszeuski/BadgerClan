@@ -36,34 +36,31 @@ public static class Strategies
         var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
         var squad = request.Units.Where(u => u.Team == request.YourTeamId);
 
-        var pointman = squad.OrderBy(u => u.Id).FirstOrDefault();
+        if (!squad.Any() || !enemies.Any()) return;
 
-        //Move knights first
-        foreach (var unit in squad.OrderByDescending(u => u.Type == "Knight"))
+        // Choose a gathering point: The average position of all friendly units
+        var avgX = (int)squad.Average(u => u.Location.Row);
+        var avgY = (int)squad.Average(u => u.Location.Col);
+        var gatheringPoint = new Coordinate(avgX, avgY);
+
+        foreach (var unit in squad)
         {
-            var closest = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
-            if (closest != null)
+            var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
+            if (closestEnemy != null)
             {
-                if (pointman != null && unit.Id != pointman.Id &&
-                unit.Location.Distance(pointman.Location) > 5)
-                {
-                    //Don't split up
-                    var toward = unit.Location.Toward(pointman.Location);
-                    moves.Add(new Move(MoveType.Walk, unit.Id, toward));
-                    moves.Add(new Move(MoveType.Walk, unit.Id, toward.Toward(pointman.Location)));
+                // Move away from the enemy
+                var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
 
-                }
-                else if (unit.Type == "Archer" && closest.Location.Distance(unit.Location) == 1)
+                // Move toward the gathering point, but not if it means getting closer to the enemy
+                var towardGathering = unit.Location.Toward(gatheringPoint);
+
+                if (awayFromEnemy.Distance(closestEnemy.Location) > towardGathering.Distance(closestEnemy.Location))
                 {
-                    //Archers run away from knights
-                    var target = unit.Location.Away(closest.Location);
-                    moves.Add(new Move(MoveType.Walk, unit.Id, target));
-                    moves.Add(Moves.AttackClosest(unit, closest));
+                    moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
                 }
-                else if (closest.Location.Distance(unit.Location) <= unit.AttackDistance)
+                else
                 {
-                    moves.Add(Moves.AttackClosest(unit, closest));
-                    moves.Add(Moves.AttackClosest(unit, closest));
+                    moves.Add(new Move(MoveType.Walk, unit.Id, towardGathering));
                 }
             }
         }
