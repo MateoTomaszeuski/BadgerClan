@@ -6,4 +6,5 @@ public interface IApiService
     Task<string> ActivateRunAndGun();
     Task<string> ActivateDoNothing();
     Task<string> ActivateRunAway();
+    Task<string> ActivateReGroup();
 }

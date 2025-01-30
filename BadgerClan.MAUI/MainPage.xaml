@@ -34,8 +34,6 @@
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
-
-
             <Button
                 Text="Run Away" 
                 Command="{Binding ActivateRunAwayCommand}"
@@ -45,6 +43,19 @@
                        TargetType="Button"
                         Binding="{Binding ActiveMode}"
                         Value="Turtle">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+             <Button
+                Text="ReGroup" 
+                Command="{Binding ActivateRunAwayCommand}"
+                HorizontalOptions="Fill" >
+                <Button.Triggers>
+                    <DataTrigger
+                       TargetType="Button"
+                        Binding="{Binding ActiveMode}"
+                        Value="ReGroup">
                         <Setter Property="IsEnabled" Value="False" />
                     </DataTrigger>
                 </Button.Triggers>

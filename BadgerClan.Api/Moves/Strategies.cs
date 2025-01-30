@@ -45,6 +45,23 @@ public static class Strategies
 
                 moves.Add(Moves.MoveAway(unit, awayFromEnemy));
             }
+            if(unit.Location.Neighbors().Any(n => n.Distance(closestEnemy.Location) <= unit.AttackDistance))
+            {
+                moves.Add(Moves.AttackClosest(unit, closestEnemy));
+            }
+        }
+    }
+    public static void ReGroup(MoveRequest request, List<Move> moves)
+    {
+        var squad = request.Units.Where(u => u.Team == request.YourTeamId);
+        
+        foreach (var unit in squad)
+        {
+            var closest = squad.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
+            if (closest != null)
+            {
+                moves.Add(Moves.StepToClosest(unit, closest, request.Units));
+            }
         }
     }
 }

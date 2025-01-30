@@ -40,4 +40,15 @@ public class ApiService(IHttpClientFactory factory) : IApiService
             return "RunAway";
         else return "";
     }
+
+    public async Task<string> ActivateReGroup()
+    {
+        HttpClient client = factory.CreateClient("ControllerApi");
+
+        var response = await client.GetAsync("/RunAway");
+        if (response.IsSuccessStatusCode)
+            return "ReGroup";
+        else return "";
+    }
+
 }

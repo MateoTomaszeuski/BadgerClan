@@ -45,6 +45,11 @@ app.MapGet("/RunAway", (HttpContext context) =>
     app.Logger.LogInformation("Received Run Away Request");
     Strategies.Strategy = "runaway";
 });
+app.MapGet("/ReGroup", (HttpContext context) =>
+{
+    app.Logger.LogInformation("Received Run Away Request");
+    Strategies.Strategy = "regroup";
+});
 
 
 app.MapPost("/", (MoveRequest request) =>
@@ -61,6 +66,10 @@ app.MapPost("/", (MoveRequest request) =>
         case "runaway":
             Strategies.RunAway(request, moves);
             app.Logger.LogInformation("Run Away strategie activated.");
+            break;
+        case "regroup":
+            Strategies.ReGroup(request, moves);
+            app.Logger.LogInformation("ReGroup strategie activated.");
             break;
         default:
             app.Logger.LogInformation("Do nothing strategie activated.");

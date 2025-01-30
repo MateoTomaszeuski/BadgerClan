@@ -32,4 +32,9 @@ public partial class MainPageViewModel : ObservableObject
     {
         ActiveMode = await apiService.ActivateRunAway();
     }
+     [RelayCommand]
+    public async Task ActivateReGroup()
+    {
+        ActiveMode = await apiService.ActivateReGroup();
+    }
 }
