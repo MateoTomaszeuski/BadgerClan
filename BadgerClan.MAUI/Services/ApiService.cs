@@ -45,7 +45,7 @@ public class ApiService(IHttpClientFactory factory) : IApiService
     {
         HttpClient client = factory.CreateClient("ControllerApi");
 
-        var response = await client.GetAsync("/RunAway");
+        var response = await client.GetAsync("/ReGroup");
         if (response.IsSuccessStatusCode)
             return "ReGroup";
         else return "";

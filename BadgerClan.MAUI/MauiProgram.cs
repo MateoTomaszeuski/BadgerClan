@@ -16,7 +16,12 @@ namespace BadgerClan.MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            var env = "http://10.0.2.2:1000";
+
+            string env = "";
+            if (DeviceInfo.Current.Platform == DevicePlatform.Android)
+                env = "http://0.0.0.0:1000";
+            else if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+                env = "http://127.0.0.1:1000";
 
             builder.Services.AddSingleton<IApiService, ApiService>();
             builder.Services.AddHttpClient("ControllerApi", (o) =>

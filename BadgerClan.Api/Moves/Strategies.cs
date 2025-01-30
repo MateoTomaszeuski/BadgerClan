@@ -19,7 +19,7 @@ public static class Strategies
 
                 if (closest.Location.Distance(unit.Location) <= unit.AttackDistance)
                 {
-                    
+
                     moves.Add(Moves.AttackClosest(unit, closest));
                     moves.Add(Moves.AttackClosest(unit, closest));
                 }
@@ -35,33 +35,35 @@ public static class Strategies
     {
         var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
         var squad = request.Units.Where(u => u.Team == request.YourTeamId);
-        
+
         foreach (var unit in squad)
         {
             var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
-            if (closestEnemy != null)
-            {
-                var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
+            var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
+            moves.Add(Moves.MoveAway(unit, awayFromEnemy));
 
-                moves.Add(Moves.MoveAway(unit, awayFromEnemy));
-            }
-            if(unit.Location.Neighbors().Any(n => n.Distance(closestEnemy.Location) <= unit.AttackDistance))
-            {
+            if (unit.Location.Distance(closestEnemy.Location) <= unit.AttackDistance)
                 moves.Add(Moves.AttackClosest(unit, closestEnemy));
-            }
+            
         }
     }
     public static void ReGroup(MoveRequest request, List<Move> moves)
     {
-        var squad = request.Units.Where(u => u.Team == request.YourTeamId);
-        
-        foreach (var unit in squad)
+        var team = request.Units.Where(u => u.Team == request.YourTeamId);
+        var centerQ = (int)team.Average(u => u.Location.Q);
+        var centerR = (int)team.Average(u => u.Location.R);
+        var regroupPoint = new Coordinate(centerQ, centerR);
+
+        var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
+
+        foreach (var unit in team)
         {
-            var closest = squad.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
-            if (closest != null)
-            {
-                moves.Add(Moves.StepToClosest(unit, closest, request.Units));
-            }
+            moves.Add(new Move(MoveType.Walk, unit.Id, unit.Location.Toward(regroupPoint)));
+            var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
+            
+            if (unit.Location.Distance(closestEnemy.Location) <= unit.AttackDistance)
+                moves.Add(Moves.AttackClosest(unit, closestEnemy));
+
         }
     }
 }
