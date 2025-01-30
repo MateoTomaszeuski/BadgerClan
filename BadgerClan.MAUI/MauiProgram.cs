@@ -18,6 +18,7 @@ namespace BadgerClan.MAUI
                 });
 
             string env = "";
+
             if (DeviceInfo.Current.Platform == DevicePlatform.Android)
                 env = "http://0.0.0.0:1000";
             else if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
