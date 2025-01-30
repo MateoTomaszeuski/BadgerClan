@@ -37,4 +37,9 @@ public static class Moves
         var attack = new Move(MoveType.Attack, unit.Id, closest.Location);
         return attack;
     }
+
+    public static Move MoveAway(UnitDto unit, Coordinate awayFromEnemy)
+    {
+        return new Move(MoveType.Walk, unit.Id, awayFromEnemy);
+    }
 }

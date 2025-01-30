@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,12 +56,14 @@ app.MapPost("/", (MoveRequest request) =>
     {
         case "runandgun":
             Strategies.RunAndGun(request, moves);
+            app.Logger.LogInformation("Run and Gun strategie activated.");
             break;
         case "runaway":
             Strategies.RunAway(request, moves);
+            app.Logger.LogInformation("Run Away strategie activated.");
             break;
         default:
-            app.Logger.LogInformation("No strategie chose.");
+            app.Logger.LogInformation("Do nothing strategie activated.");
             moves = new List<Move>();
             break;
     }

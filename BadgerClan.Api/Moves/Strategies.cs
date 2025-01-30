@@ -19,6 +19,7 @@ public static class Strategies
 
                 if (closest.Location.Distance(unit.Location) <= unit.AttackDistance)
                 {
+                    
                     moves.Add(Moves.AttackClosest(unit, closest));
                     moves.Add(Moves.AttackClosest(unit, closest));
                 }
@@ -34,7 +35,7 @@ public static class Strategies
     {
         var enemies = request.Units.Where(u => u.Team != request.YourTeamId);
         var squad = request.Units.Where(u => u.Team == request.YourTeamId);
-
+        
         foreach (var unit in squad)
         {
             var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
@@ -42,7 +43,7 @@ public static class Strategies
             {
                 var awayFromEnemy = unit.Location.Away(closestEnemy.Location);
 
-                moves.Add(new Move(MoveType.Walk, unit.Id, awayFromEnemy));
+                moves.Add(Moves.MoveAway(unit, awayFromEnemy));
             }
         }
     }
