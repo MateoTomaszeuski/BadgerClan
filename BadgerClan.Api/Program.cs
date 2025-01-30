@@ -29,25 +29,25 @@ int port = new Uri(url).Port;
 
 app.MapGet("/RunAndGun", (HttpContext context) =>
 {
-    app.Logger.LogInformation("Received Run and Gun Request");
+    app.Logger.LogInformation("Received Run and Gun Activation Request");
     Strategies.Strategy = "runandgun";
 });
 
 
 app.MapGet("/DoNothing", (HttpContext context) =>
 {
-    app.Logger.LogInformation("Received Do Nothing Request");
+    app.Logger.LogInformation("Received Do Nothing Activation Request");
     Strategies.Strategy = "";
 });
 
 app.MapGet("/RunAway", (HttpContext context) =>
 {
-    app.Logger.LogInformation("Received Run Away Request");
+    app.Logger.LogInformation("Received Run Away Activation Request");
     Strategies.Strategy = "runaway";
 });
 app.MapGet("/ReGroup", (HttpContext context) =>
 {
-    app.Logger.LogInformation("Received Run Away Request");
+    app.Logger.LogInformation("Received Run Away Activation Request");
     Strategies.Strategy = "regroup";
 });
 
@@ -61,18 +61,18 @@ app.MapPost("/", (MoveRequest request) =>
     {
         case "runandgun":
             Strategies.RunAndGun(request, moves);
-            app.Logger.LogInformation("Run and Gun strategie activated.");
+            app.Logger.LogInformation("Run and Gun strategy returned.");
             break;
         case "runaway":
             Strategies.RunAway(request, moves);
-            app.Logger.LogInformation("Run Away strategie activated.");
+            app.Logger.LogInformation("Run Away strategy returned.");
             break;
         case "regroup":
             Strategies.ReGroup(request, moves);
-            app.Logger.LogInformation("ReGroup strategie activated.");
+            app.Logger.LogInformation("ReGroup strategy returned.");
             break;
         default:
-            app.Logger.LogInformation("Do nothing strategie activated.");
+            app.Logger.LogInformation("Do nothing strategy returned.");
             moves = new List<Move>();
             break;
     }
