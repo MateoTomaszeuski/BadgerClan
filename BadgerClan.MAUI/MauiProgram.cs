@@ -17,7 +17,7 @@ namespace BadgerClan.MAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            string env = "https://badgerclanapi1.azurewebsites.net";
+            string env = "http://10.0.2.2:1000";
 
             //if (DeviceInfo.Current.Platform == DevicePlatform.Android)
             //    env = "http://10.0.2.2:1000";
