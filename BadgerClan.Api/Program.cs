@@ -51,6 +51,7 @@ app.MapGet("/ReGroup", (HttpContext context) =>
     Strategies.Strategy = "regroup";
 });
 
+app.MapGet("/",(HttpContext context) => "Hello World");
 
 app.MapPost("/", (MoveRequest request) =>
 {
