@@ -22,11 +22,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-string url = app.Configuration["ASPNETCORE_URLS"]?.Split(";").Last() ?? throw new Exception("Unable to find URL");
-int port = new Uri(url).Port;
-
-
-
 app.MapGet("/RunAndGun", (HttpContext context) =>
 {
     app.Logger.LogInformation("Received Run and Gun Activation Request");
