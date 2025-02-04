@@ -27,7 +27,6 @@ public partial class MainPageViewModel : ObservableObject
 
     public MainPageViewModel(IApiService apiService)
     {
-        ActiveMode = "Do Nothing";
         this.apiService = apiService;
     }
 
@@ -35,28 +34,36 @@ public partial class MainPageViewModel : ObservableObject
     public async Task ActivateRunAndGun()
     {
         foreach (var api in ApiList)
-        { ActiveMode = await apiService.ActivateRunAndGun(api.ApiUrl); }
+        {
+            await apiService.ActivateRunAndGun(api.ApiUrl);
+        }
     }
 
     [RelayCommand]
     public async Task ActivateDoNothing()
     {
         foreach (var api in ApiList)
-        { ActiveMode = await apiService.ActivateDoNothing(api.ApiUrl); }
+        {
+            await apiService.ActivateDoNothing(api.ApiUrl);
+        }
     }
 
     [RelayCommand]
     public async Task ActivateRunAway()
     {
         foreach (var api in ApiList)
-        { await apiService.ActivateRunAway(api.ApiUrl); }
+        {
+            await apiService.ActivateRunAway(api.ApiUrl);
+        }
     }
 
     [RelayCommand]
     public async Task ActivateReGroup()
     {
         foreach (var api in ApiList)
-        { await apiService.ActivateReGroup(api.ApiUrl); }
+        {
+            await apiService.ActivateReGroup(api.ApiUrl);
+        }
 
     }
 

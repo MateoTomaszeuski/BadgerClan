@@ -9,8 +9,10 @@
             Spacing="25">
 
             <Label Text="Enter a new API"
-                   SemanticProperties.HeadingLevel="Level3"/>
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"/>
             <HorizontalStackLayout
+                HorizontalOptions="Center"
                 Spacing="15">
                 <Entry
                     Placeholder="API Name"
@@ -27,15 +29,13 @@
                 Command="{Binding AddApiCommand}"
                 HorizontalOptions="Fill"/>
 
-            <Label Text="Select an Api"/>
-
             <Label
                 Text="Choose a Strategy!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1"/>
 
             <Label
-                Text="{Binding ActiveMode, StringFormat='Active strategy: {0}'}"
+                Text="{Binding ActiveMode, StringFormat='Last strategy used: {0}'}"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"/>
 
@@ -43,64 +43,29 @@
                 Text="Run and Gun"
                 Command="{Binding ActivateRunAndGunCommand}"
                 HorizontalOptions="Fill">
-                <Button.Triggers>
-                    <DataTrigger
-                        TargetType="Button"
-                        Binding="{Binding ActiveMode}"
-                        Value="Run and Gun">
-                        <Setter Property="IsEnabled"
-                                Value="False"/>
-                    </DataTrigger>
-                </Button.Triggers>
             </Button>
             <Button
                 Text="Run Away"
                 Command="{Binding ActivateRunAwayCommand}"
                 HorizontalOptions="Fill">
-                <Button.Triggers>
-                    <DataTrigger
-                        TargetType="Button"
-                        Binding="{Binding ActiveMode}"
-                        Value="RunAway">
-                        <Setter Property="IsEnabled"
-                                Value="False"/>
-                    </DataTrigger>
-                </Button.Triggers>
             </Button>
             <Button
                 Text="ReGroup"
                 Command="{Binding ActivateReGroupCommand}"
                 HorizontalOptions="Fill">
-                <Button.Triggers>
-                    <DataTrigger
-                        TargetType="Button"
-                        Binding="{Binding ActiveMode}"
-                        Value="ReGroup">
-                        <Setter Property="IsEnabled"
-                                Value="False"/>
-                    </DataTrigger>
-                </Button.Triggers>
             </Button>
             <Button
                 Text="Do Nothing"
                 Command="{Binding ActivateDoNothingCommand}"
                 HorizontalOptions="Fill">
-                <Button.Triggers>
-                    <DataTrigger
-                        TargetType="Button"
-                        Binding="{Binding ActiveMode}"
-                        Value="Do Nothing">
-                        <Setter Property="IsEnabled"
-                                Value="False"/>
-                    </DataTrigger>
-                </Button.Triggers>
             </Button>
 
             <VerticalStackLayout>
                 <Label
-                    Text="APIs"
+                    Text="Select Api"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1"/>
+                
                 <CollectionView
                     ItemsSource="{Binding ApiList}"
                     SelectionMode="Multiple"
@@ -108,8 +73,8 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label
-                                Text="{Binding Name}"
-                                Grid.Column="0"/>
+                                Text="{Binding ApiName}"
+                                FontSize="Header"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
