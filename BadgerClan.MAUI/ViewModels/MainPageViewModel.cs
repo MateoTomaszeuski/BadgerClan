@@ -11,6 +11,15 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private string selectedApi;
+
+    [ObservableProperty]
+    private string newApiName;
+
+    [ObservableProperty]
+    private string newApiUrl;
+
+    [ObservableProperty]
+    private ObservableCollection<(string,string)> apiList;
     private readonly IApiService apiService;
 
     public MainPageViewModel(IApiService apiService)
@@ -35,7 +44,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         ActiveMode = await apiService.ActivateRunAway(SelectedApi);
     }
-     [RelayCommand]
+    [RelayCommand]
     public async Task ActivateReGroup()
     {
         ActiveMode = await apiService.ActivateReGroup(SelectedApi);
@@ -51,7 +60,8 @@ public partial class MainPageViewModel : ObservableObject
         SelectedApi = "AzureApi2";
     }
     [RelayCommand]
-    public async Task ActivateLocalApi(){
+    public async Task ActivateLocalApi()
+    {
         SelectedApi = "LocalApi";
     }
 }

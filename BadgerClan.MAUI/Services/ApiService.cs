@@ -3,11 +3,12 @@ using System.Net.Http;
 
 namespace BadgerClan.MAUI.Services;
 
-public class ApiService(IHttpClientFactory factory) : IApiService
+public class ApiService(): IApiService
 {
     public async Task<string> ActivateRunAndGun(string api)
     {
-        HttpClient client = factory.CreateClient(api);
+        HttpClient client = new HttpClient() { BaseAddress = new Uri(api) };
+
 
         var response = await client.GetAsync("/RunAndGun");
         if (response.IsSuccessStatusCode)
@@ -17,7 +18,7 @@ public class ApiService(IHttpClientFactory factory) : IApiService
 
     public async Task<string> ActivateDoNothing(string api)
     {
-        HttpClient client = factory.CreateClient(api);
+        HttpClient client = new HttpClient() { BaseAddress = new Uri(api) };
 
         var response = await client.GetAsync("/DoNothing");
         if (response.IsSuccessStatusCode)
@@ -27,8 +28,7 @@ public class ApiService(IHttpClientFactory factory) : IApiService
 
     public async Task<string> ActivateRunAway(string api)
     {
-        HttpClient client = factory.CreateClient(api);
-
+        HttpClient client = new HttpClient() { BaseAddress = new Uri(api) };
         var response = await client.GetAsync("/RunAway");
         if (response.IsSuccessStatusCode)
             return "RunAway";
@@ -37,7 +37,8 @@ public class ApiService(IHttpClientFactory factory) : IApiService
 
     public async Task<string> ActivateReGroup(string api)
     {
-        HttpClient client = factory.CreateClient(api);
+        HttpClient client = new HttpClient() { BaseAddress = new Uri(api) };
+
 
         var response = await client.GetAsync("/ReGroup");
         if (response.IsSuccessStatusCode)
