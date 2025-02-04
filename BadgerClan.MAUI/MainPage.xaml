@@ -103,7 +103,7 @@
                     SemanticProperties.HeadingLevel="Level1"/>
                 <CollectionView
                     ItemsSource="{Binding ApiList}"
-                    SelectionMode="Mulitple"
+                    SelectionMode="Multiple"
                     SelectedItems="{Binding SelectedApis}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
