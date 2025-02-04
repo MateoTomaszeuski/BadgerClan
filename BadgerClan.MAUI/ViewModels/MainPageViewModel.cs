@@ -1,6 +1,7 @@
 ﻿using BadgerClan.MAUI.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace BadgerClan.MAUI.ViewModels;
 
@@ -19,7 +20,7 @@ public partial class MainPageViewModel : ObservableObject
     private string newApiUrl;
 
     [ObservableProperty]
-    private ObservableCollection<(string,string)> apiList;
+    private ObservableCollection<(string ApiName,string ApiUrl)> apiList;
     private readonly IApiService apiService;
 
     public MainPageViewModel(IApiService apiService)
@@ -39,29 +40,12 @@ public partial class MainPageViewModel : ObservableObject
     {
         ActiveMode = await apiService.ActivateDoNothing(SelectedApi);
     }
+    
     [RelayCommand]
-    public async Task ActivateRunAway()
+    public async Task AddApi()
     {
-        ActiveMode = await apiService.ActivateRunAway(SelectedApi);
-    }
-    [RelayCommand]
-    public async Task ActivateReGroup()
-    {
-        ActiveMode = await apiService.ActivateReGroup(SelectedApi);
-    }
-    [RelayCommand]
-    public async Task ActivateAzureApi1()
-    {
-        SelectedApi = "AzureApi1";
-    }
-    [RelayCommand]
-    public async Task ActivateAzureApi2()
-    {
-        SelectedApi = "AzureApi2";
-    }
-    [RelayCommand]
-    public async Task ActivateLocalApi()
-    {
-        SelectedApi = "LocalApi";
+        ApiList.Add((NewApiName, NewApiUrl));
+        NewApiName = "";
+        NewApiUrl = "";
     }
 }

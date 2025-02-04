@@ -11,14 +11,24 @@
             <Label Text="Enter a new API"
                    SemanticProperties.HeadingLevel="Level3"/>
             <HorizontalStackLayout
-                Spacing="25">
+                Spacing="15">
                 <Entry
                     Placeholder="Enter API Name"
                     Text="{Binding NewApiName}"/>
-                <Entry 
+                <Entry
                     Placeholder="Enter API URL"
                     Text="{Binding NewApiUrl}"/>
+                <Button
+                    Text="Add API"
+                    Command="{Binding AddApiCommand}"
+                    HorizontalOptions="Fill"/>
             </HorizontalStackLayout>
+
+            <Label Text="Select an Api"/>
+
+            <Picker ItemsSource="{Binding ApiList}"
+                    SelectedItem="{Binding SelectedApi}"
+                     ItemDisplayBinding="{Binding ApiName}"/>
 
             <Label
                 Text="Choose a Strategy!"
