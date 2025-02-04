@@ -5,15 +5,9 @@ namespace BadgerClan.MAUI.Services;
 
 public class ApiService(IHttpClientFactory factory) : IApiService
 {
-    public string GetClientUri()
+    public async Task<string> ActivateRunAndGun(string api)
     {
-        HttpClient client = factory.CreateClient("ControllerApi");
-
-        return client.BaseAddress.OriginalString;
-    }
-    public async Task<string> ActivateRunAndGun()
-    {
-        HttpClient client = factory.CreateClient("ControllerApi");
+        HttpClient client = factory.CreateClient(api);
 
         var response = await client.GetAsync("/RunAndGun");
         if (response.IsSuccessStatusCode)
@@ -21,9 +15,9 @@ public class ApiService(IHttpClientFactory factory) : IApiService
         else return "";
     }
 
-    public async Task<string> ActivateDoNothing()
+    public async Task<string> ActivateDoNothing(string api)
     {
-        HttpClient client = factory.CreateClient("ControllerApi");
+        HttpClient client = factory.CreateClient(api);
 
         var response = await client.GetAsync("/DoNothing");
         if (response.IsSuccessStatusCode)
@@ -31,9 +25,9 @@ public class ApiService(IHttpClientFactory factory) : IApiService
         else return "";
     }
 
-    public async Task<string> ActivateRunAway()
+    public async Task<string> ActivateRunAway(string api)
     {
-        HttpClient client = factory.CreateClient("ControllerApi");
+        HttpClient client = factory.CreateClient(api);
 
         var response = await client.GetAsync("/RunAway");
         if (response.IsSuccessStatusCode)
@@ -41,9 +35,9 @@ public class ApiService(IHttpClientFactory factory) : IApiService
         else return "";
     }
 
-    public async Task<string> ActivateReGroup()
+    public async Task<string> ActivateReGroup(string api)
     {
-        HttpClient client = factory.CreateClient("ControllerApi");
+        HttpClient client = factory.CreateClient(api);
 
         var response = await client.GetAsync("/ReGroup");
         if (response.IsSuccessStatusCode)

@@ -8,68 +8,115 @@
             Padding="30,0"
             Spacing="25">
 
-            <Label
-                Text="{Binding ApiUri}"/>
+            <HorizontalStackLayout
+                Padding="30,0"
+                Spacing="25">
+
+                <Button Text="Azure API 1"
+                        Command="{Binding ActivateAzureApi1Command}"
+                        HorizontalOptions="Fill">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding SelectedApi}"
+                            Value="AzureApi1">
+                            <Setter Property="IsEnabled"
+                                    Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Azure API 2"
+                        Command="{Binding ActivateAzureApi2Command}"
+                        HorizontalOptions="Fill">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding SelectedApi}"
+                            Value="AzureApi2">
+                            <Setter Property="IsEnabled"
+                                    Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Local API"
+                        Command="{Binding ActivateLocalApiCommand}"
+                        HorizontalOptions="Fill">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding SelectedApi}"
+                            Value="LocalApi">
+                            <Setter Property="IsEnabled"
+                                    Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+            </HorizontalStackLayout>
 
             <Label
                 Text="Choose a Strategy!"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1"/>
 
-                <Label
+            <Label
                 Text="{Binding ActiveMode, StringFormat='Active strategy: {0}'}"
                 Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2" />
+                SemanticProperties.HeadingLevel="Level2"/>
 
             <Button
-                Text="Run and Gun" 
+                Text="Run and Gun"
                 Command="{Binding ActivateRunAndGunCommand}"
-                HorizontalOptions="Fill" >
+                HorizontalOptions="Fill">
                 <Button.Triggers>
                     <DataTrigger
                         TargetType="Button"
                         Binding="{Binding ActiveMode}"
                         Value="Run and Gun">
-                        <Setter Property="IsEnabled" Value="False" />
+                        <Setter Property="IsEnabled"
+                                Value="False"/>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
             <Button
-                Text="Run Away" 
+                Text="Run Away"
                 Command="{Binding ActivateRunAwayCommand}"
-                HorizontalOptions="Fill" >
+                HorizontalOptions="Fill">
                 <Button.Triggers>
                     <DataTrigger
-                       TargetType="Button"
+                        TargetType="Button"
                         Binding="{Binding ActiveMode}"
                         Value="RunAway">
-                        <Setter Property="IsEnabled" Value="False" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
-             <Button
-                Text="ReGroup" 
-                Command="{Binding ActivateReGroupCommand}"
-                HorizontalOptions="Fill" >
-                <Button.Triggers>
-                    <DataTrigger
-                       TargetType="Button"
-                        Binding="{Binding ActiveMode}"
-                        Value="ReGroup">
-                        <Setter Property="IsEnabled" Value="False" />
+                        <Setter Property="IsEnabled"
+                                Value="False"/>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
             <Button
-                Text="Do Nothing" 
+                Text="ReGroup"
+                Command="{Binding ActivateReGroupCommand}"
+                HorizontalOptions="Fill">
+                <Button.Triggers>
+                    <DataTrigger
+                        TargetType="Button"
+                        Binding="{Binding ActiveMode}"
+                        Value="ReGroup">
+                        <Setter Property="IsEnabled"
+                                Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button
+                Text="Do Nothing"
                 Command="{Binding ActivateDoNothingCommand}"
-                HorizontalOptions="Fill" >
+                HorizontalOptions="Fill">
                 <Button.Triggers>
                     <DataTrigger
                         TargetType="Button"
                         Binding="{Binding ActiveMode}"
                         Value="Do Nothing">
-                        <Setter Property="IsEnabled" Value="False" />
+                        <Setter Property="IsEnabled"
+                                Value="False"/>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>

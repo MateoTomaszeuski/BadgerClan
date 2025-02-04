@@ -2,9 +2,8 @@
 
 public interface IApiService
 {
-    string GetClientUri();
-    Task<string> ActivateRunAndGun();
-    Task<string> ActivateDoNothing();
-    Task<string> ActivateRunAway();
-    Task<string> ActivateReGroup();
+    Task<string> ActivateRunAndGun(string api);
+    Task<string> ActivateDoNothing(string api);
+    Task<string> ActivateRunAway(string api);
+    Task<string> ActivateReGroup(string api);
 }

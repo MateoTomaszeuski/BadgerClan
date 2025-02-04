@@ -8,33 +8,50 @@ public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
     private string activeMode;
+
+    [ObservableProperty]
+    private string selectedApi;
     private readonly IApiService apiService;
 
     public MainPageViewModel(IApiService apiService)
     {
         ActiveMode = "Do Nothing";
+        selectedApi = "AzureApi1";
         this.apiService = apiService;
     }
-    public string ApiUri { get => apiService.GetClientUri();}
 
     [RelayCommand]
     public async Task ActivateRunAndGun()
     {
-        ActiveMode = await apiService.ActivateRunAndGun();
+        ActiveMode = await apiService.ActivateRunAndGun(SelectedApi);
     }
     [RelayCommand]
     public async Task ActivateDoNothing()
     {
-        ActiveMode = await apiService.ActivateDoNothing();
+        ActiveMode = await apiService.ActivateDoNothing(SelectedApi);
     }
     [RelayCommand]
     public async Task ActivateRunAway()
     {
-        ActiveMode = await apiService.ActivateRunAway();
+        ActiveMode = await apiService.ActivateRunAway(SelectedApi);
     }
      [RelayCommand]
     public async Task ActivateReGroup()
     {
-        ActiveMode = await apiService.ActivateReGroup();
+        ActiveMode = await apiService.ActivateReGroup(SelectedApi);
+    }
+    [RelayCommand]
+    public async Task ActivateAzureApi1()
+    {
+        SelectedApi = "AzureApi1";
+    }
+    [RelayCommand]
+    public async Task ActivateAzureApi2()
+    {
+        SelectedApi = "AzureApi2";
+    }
+    [RelayCommand]
+    public async Task ActivateLocalApi(){
+        SelectedApi = "LocalApi";
     }
 }
