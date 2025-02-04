@@ -9,7 +9,6 @@
             Spacing="25">
 
             <HorizontalStackLayout
-                Padding="30,0"
                 Spacing="25">
 
                 <Button Text="Azure API 1"
