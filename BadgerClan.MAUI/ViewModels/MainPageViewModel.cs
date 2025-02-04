@@ -37,6 +37,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             await apiService.ActivateRunAndGun(api.ApiUrl);
         }
+        ActiveMode = "Run and Gun";
     }
 
     [RelayCommand]
@@ -46,6 +47,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             await apiService.ActivateDoNothing(api.ApiUrl);
         }
+        ActiveMode = "Do Nothing";
     }
 
     [RelayCommand]
@@ -55,6 +57,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             await apiService.ActivateRunAway(api.ApiUrl);
         }
+        ActiveMode = "Run Away";
     }
 
     [RelayCommand]
@@ -65,6 +68,7 @@ public partial class MainPageViewModel : ObservableObject
             await apiService.ActivateReGroup(api.ApiUrl);
         }
 
+        ActiveMode = "Re Group";
     }
 
     [RelayCommand]
