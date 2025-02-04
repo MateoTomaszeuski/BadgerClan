@@ -1,5 +1,7 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - BadgerClanApi1
+name: Build and deploy ASP.Net Core app to Azure Web App - mateobadgerclan1
 
 on:
   push:
@@ -25,13 +27,13 @@ jobs:
         run: dotnet build BadgerClan.Api --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish BadgerClan.Api -c Release -o ${{env.DOTNET_ROOT}}/myapi
+        run: dotnet publish BadgerClan.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: .net-api
-          path: ${{env.DOTNET_ROOT}}/myapi
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,20 +49,20 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-api
+          name: .net-app
       
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9324FBCEA4CC4A4E8643BD86D5A7C9F4 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C3546E8F416443A1B9A3900EC3059AF1 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4049BBD6EFDE4BFBA5DC001F4A146357 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B3AA0B774BFB40978FA6A25EED108C7C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DE05F704AECE4A379E26C3B2C26F1BBA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_24092D0157AD40939F958AD589A36798 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'BadgerClanApi1'
+          app-name: 'mateobadgerclan1'
           slot-name: 'Production'
           package: .
           
