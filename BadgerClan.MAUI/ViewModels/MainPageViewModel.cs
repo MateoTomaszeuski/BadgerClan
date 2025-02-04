@@ -12,7 +12,7 @@ public partial class MainPageViewModel : ObservableObject
     private string activeMode;
 
     [ObservableProperty]
-    private ApiInfo selectedApi;
+    private ObservableCollection<ApiInfo> selectedApis;
 
     [ObservableProperty]
     private string newApiName;
@@ -34,22 +34,30 @@ public partial class MainPageViewModel : ObservableObject
     [RelayCommand]
     public async Task ActivateRunAndGun()
     {
-        ActiveMode = await apiService.ActivateRunAndGun(SelectedApi.ApiUrl);
+        foreach (var api in ApiList)
+        { ActiveMode = await apiService.ActivateRunAndGun(api.ApiUrl); }
     }
+
     [RelayCommand]
     public async Task ActivateDoNothing()
     {
-        ActiveMode = await apiService.ActivateDoNothing(SelectedApi.ApiUrl);
+        foreach (var api in ApiList)
+        { ActiveMode = await apiService.ActivateDoNothing(api.ApiUrl); }
     }
+
     [RelayCommand]
     public async Task ActivateRunAway()
     {
-        ActiveMode = await apiService.ActivateRunAway(SelectedApi.ApiUrl);
+        foreach (var api in ApiList)
+        { await apiService.ActivateRunAway(api.ApiUrl); }
     }
+
     [RelayCommand]
     public async Task ActivateReGroup()
     {
-        ActiveMode = await apiService.ActivateReGroup(SelectedApi.ApiUrl);
+        foreach (var api in ApiList)
+        { await apiService.ActivateReGroup(api.ApiUrl); }
+
     }
 
     [RelayCommand]

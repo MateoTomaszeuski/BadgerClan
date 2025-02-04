@@ -14,22 +14,20 @@
                 Spacing="15">
                 <Entry
                     Placeholder="API Name"
-                    Text="{Binding NewApiName}"/>
+                    Text="{Binding NewApiName}"
+                    HorizontalOptions="Start"/>
                 <Entry
                     Placeholder="API URL"
-                    Text="{Binding NewApiUrl}"/>
+                    Text="{Binding NewApiUrl}"
+                    HorizontalOptions="End"/>
             </HorizontalStackLayout>
-            
+
             <Button
-                    Text="Add API"
-                    Command="{Binding AddApiCommand}"
-                    HorizontalOptions="Fill"/>
+                Text="Add API"
+                Command="{Binding AddApiCommand}"
+                HorizontalOptions="Fill"/>
 
             <Label Text="Select an Api"/>
-
-            <Picker ItemsSource="{Binding ApiList}"
-                    SelectedItem="{Binding SelectedApi}"
-                ItemDisplayBinding="{Binding ApiName}" />
 
             <Label
                 Text="Choose a Strategy!"
@@ -97,6 +95,25 @@
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
+
+            <VerticalStackLayout>
+                <Label
+                    Text="APIs"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1"/>
+                <CollectionView
+                    ItemsSource="{Binding ApiList}"
+                    SelectionMode="Mulitple"
+                    SelectedItems="{Binding SelectedApis}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label
+                                Text="{Binding Name}"
+                                Grid.Column="0"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
