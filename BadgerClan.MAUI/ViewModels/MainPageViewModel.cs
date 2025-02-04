@@ -1,4 +1,5 @@
-﻿using BadgerClan.MAUI.Services;
+﻿using BadgerClan.MAUI.Models;
+using BadgerClan.MAUI.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ public partial class MainPageViewModel : ObservableObject
     private string activeMode;
 
     [ObservableProperty]
-    private string selectedApi;
+    private ApiInfo selectedApi;
 
     [ObservableProperty]
     private string newApiName;
@@ -20,31 +21,41 @@ public partial class MainPageViewModel : ObservableObject
     private string newApiUrl;
 
     [ObservableProperty]
-    private ObservableCollection<(string ApiName,string ApiUrl)> apiList;
+    private ObservableCollection<ApiInfo> apiList = new();
+
     private readonly IApiService apiService;
 
     public MainPageViewModel(IApiService apiService)
     {
         ActiveMode = "Do Nothing";
-        selectedApi = "AzureApi1";
         this.apiService = apiService;
     }
 
     [RelayCommand]
     public async Task ActivateRunAndGun()
     {
-        ActiveMode = await apiService.ActivateRunAndGun(SelectedApi);
+        ActiveMode = await apiService.ActivateRunAndGun(SelectedApi.ApiUrl);
     }
     [RelayCommand]
     public async Task ActivateDoNothing()
     {
-        ActiveMode = await apiService.ActivateDoNothing(SelectedApi);
+        ActiveMode = await apiService.ActivateDoNothing(SelectedApi.ApiUrl);
     }
-    
+    [RelayCommand]
+    public async Task ActivateRunAway()
+    {
+        ActiveMode = await apiService.ActivateRunAway(SelectedApi.ApiUrl);
+    }
+    [RelayCommand]
+    public async Task ActivateReGroup()
+    {
+        ActiveMode = await apiService.ActivateReGroup(SelectedApi.ApiUrl);
+    }
+
     [RelayCommand]
     public async Task AddApi()
     {
-        ApiList.Add((NewApiName, NewApiUrl));
+        ApiList.Add(new() { ApiName = NewApiName, ApiUrl = NewApiUrl });
         NewApiName = "";
         NewApiUrl = "";
     }

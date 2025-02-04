@@ -13,22 +13,23 @@
             <HorizontalStackLayout
                 Spacing="15">
                 <Entry
-                    Placeholder="Enter API Name"
+                    Placeholder="API Name"
                     Text="{Binding NewApiName}"/>
                 <Entry
-                    Placeholder="Enter API URL"
+                    Placeholder="API URL"
                     Text="{Binding NewApiUrl}"/>
-                <Button
+            </HorizontalStackLayout>
+            
+            <Button
                     Text="Add API"
                     Command="{Binding AddApiCommand}"
                     HorizontalOptions="Fill"/>
-            </HorizontalStackLayout>
 
             <Label Text="Select an Api"/>
 
             <Picker ItemsSource="{Binding ApiList}"
                     SelectedItem="{Binding SelectedApi}"
-                     ItemDisplayBinding="{Binding ApiName}"/>
+                ItemDisplayBinding="{Binding ApiName}" />
 
             <Label
                 Text="Choose a Strategy!"
