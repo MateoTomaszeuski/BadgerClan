@@ -1,4 +1,6 @@
-﻿namespace BadgerClan.MAUI.Models;
+﻿using System.Collections;
+
+namespace BadgerClan.MAUI.Models;
 
 public class ApiInfo
 {

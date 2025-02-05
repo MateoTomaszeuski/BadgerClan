@@ -69,7 +69,7 @@
                 <CollectionView
                     ItemsSource="{Binding ApiList}"
                     SelectionMode="Multiple"
-                    SelectedItems="{Binding SelectedApis}">
+                    SelectedItems="{Binding SelectedApis, Mode=TwoWay}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label
