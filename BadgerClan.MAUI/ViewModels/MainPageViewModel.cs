@@ -42,7 +42,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         foreach (var api in SelectedApisAsApiInfo)
         {
-            await apiService.ActivateRunAndGun(api.ApiUrl);
+            await apiService.ActivateRunAndGun(api);
         }
         ActiveMode = "Run and Gun";
     }
@@ -52,7 +52,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         foreach (var api in SelectedApisAsApiInfo)
         {
-            await apiService.ActivateDoNothing(api.ApiUrl);
+            await apiService.ActivateDoNothing(api);
         }
         ActiveMode = "Do Nothing";
     }
@@ -62,7 +62,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         foreach (var api in SelectedApisAsApiInfo)
         {
-            await apiService.ActivateRunAway(api.ApiUrl);
+            await apiService.ActivateRunAway(api);
         }
         ActiveMode = "Run Away";
     }
@@ -72,7 +72,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         foreach (var api in SelectedApisAsApiInfo)
         {
-            await apiService.ActivateReGroup(api.ApiUrl);
+            await apiService.ActivateReGroup(api);
         }
 
         ActiveMode = "Re Group";

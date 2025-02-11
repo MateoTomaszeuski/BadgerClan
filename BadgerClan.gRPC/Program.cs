@@ -11,7 +11,7 @@ builder.Services.AddCodeFirstGrpc();
 
 var app = builder.Build();
 
-app.MapGrpcService<IStrategyService>();
+app.MapGrpcService<StrategyService>();
 
 app.MapPost("/", (MoveRequest request) =>
 {
@@ -47,6 +47,6 @@ public class StrategyService : IStrategyService
     public Task<ConfirmationReply> ChangeStrat(StrategyRequest request, CallContext context = default)
     {
         Strategies.currentStrat = request.Strategy;
-        return Task.FromResult(new ConfirmationReply { Message = "Strategy changed to " + request.Strategy });
+        return Task.FromResult(new ConfirmationReply { Message = request.Strategy });
     }
 }

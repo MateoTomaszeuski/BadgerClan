@@ -1,9 +1,11 @@
-﻿namespace BadgerClan.MAUI.Services;
+﻿using BadgerClan.MAUI.Models;
+
+namespace BadgerClan.MAUI.Services;
 
 public interface IApiService
 {
-    Task<string> ActivateRunAndGun(string api);
-    Task<string> ActivateDoNothing(string api);
-    Task<string> ActivateRunAway(string api);
-    Task<string> ActivateReGroup(string api);
+    Task<string> ActivateRunAndGun(ApiInfo api);
+    Task<string> ActivateDoNothing(ApiInfo api);
+    Task<string> ActivateRunAway(ApiInfo api);
+    Task<string> ActivateReGroup(ApiInfo api);
 }
