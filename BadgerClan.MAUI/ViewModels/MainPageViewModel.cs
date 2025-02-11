@@ -11,9 +11,6 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty]
     private string activeMode;
 
-    [ObservableProperty]
-    private ObservableCollection<object> selectedApis = new();
-
     public IList<ApiInfo> SelectedApisAsApiInfo => SelectedApis.Cast<ApiInfo>().ToList();
 
     [ObservableProperty]
@@ -23,7 +20,15 @@ public partial class MainPageViewModel : ObservableObject
     private string newApiUrl;
 
     [ObservableProperty]
+    private ApiType newApiType;
+
+    public IEnumerable<ApiType> ApiTypes => Enum.GetValues(typeof(ApiType)).Cast<ApiType>();
+
+    [ObservableProperty]
     private ObservableCollection<ApiInfo> apiList = new();
+
+    [ObservableProperty]
+    private ObservableCollection<object> selectedApis = new();
 
     private readonly IApiService apiService;
 
@@ -76,8 +81,9 @@ public partial class MainPageViewModel : ObservableObject
     [RelayCommand]
     public async Task AddApi()
     {
-        ApiList.Add(new() { ApiName = NewApiName, ApiUrl = NewApiUrl });
+        ApiList.Add(new() { ApiName = NewApiName, ApiUrl = NewApiUrl, ApiType=newApiType });
         NewApiName = "";
         NewApiUrl = "";
+        NewApiType = ApiType.REST;
     }
 }

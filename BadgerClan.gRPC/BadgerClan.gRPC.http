@@ -1,0 +1,6 @@
+@BadgerClan.gRPC_HostAddress = http://localhost:5141
+
+GET {{BadgerClan.gRPC_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

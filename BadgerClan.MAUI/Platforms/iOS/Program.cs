@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace BadgerClan.MAUI
+namespace BadgerClan.MAUI.Platforms.iOS
 {
     public class Program
     {

@@ -2,11 +2,11 @@
 using BadgerClan.Logic.Bot;
 using System.Reflection.Emit;
 
-namespace BadgerClan.Api.Moves;
+namespace BadgerClan.Shared.Moves;
 
 public static class Strategies
 {
-    public static string Strategy = "";
+    public static string currentStrat = "";
     public static void RunAndGun(MoveRequest request, List<Move> moves)
     {
         foreach (var unit in request.Units.Where(u => u.Team == request.YourTeamId))
@@ -44,7 +44,7 @@ public static class Strategies
 
             if (unit.Location.Distance(closestEnemy.Location) <= unit.AttackDistance)
                 moves.Add(Moves.AttackClosest(unit, closestEnemy));
-            
+
         }
     }
     public static void ReGroup(MoveRequest request, List<Move> moves)
@@ -60,7 +60,7 @@ public static class Strategies
         {
             moves.Add(new Move(MoveType.Walk, unit.Id, unit.Location.Toward(regroupPoint)));
             var closestEnemy = enemies.OrderBy(u => u.Location.Distance(unit.Location)).FirstOrDefault();
-            
+
             if (unit.Location.Distance(closestEnemy.Location) <= unit.AttackDistance)
                 moves.Add(Moves.AttackClosest(unit, closestEnemy));
 

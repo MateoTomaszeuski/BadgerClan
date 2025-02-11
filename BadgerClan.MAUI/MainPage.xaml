@@ -22,6 +22,9 @@
                     Placeholder="API URL"
                     Text="{Binding NewApiUrl}"
                     HorizontalOptions="End"/>
+                <Picker  
+                    ItemsSource="{Binding ApiTypes}"
+                    SelectedItem="{Binding NewApiType}"/>
             </HorizontalStackLayout>
 
             <Button
@@ -65,7 +68,7 @@
                     Text="Select Api"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1"/>
-                
+
                 <CollectionView
                     ItemsSource="{Binding ApiList}"
                     SelectionMode="Multiple"

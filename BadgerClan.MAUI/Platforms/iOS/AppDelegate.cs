@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace BadgerClan.MAUI
+namespace BadgerClan.MAUI.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

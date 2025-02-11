@@ -1,7 +1,7 @@
 ﻿using BadgerClan.Logic;
 using System.Reflection.Emit;
 
-namespace BadgerClan.Api.Moves;
+namespace BadgerClan.Shared.Moves;
 
 public static class Moves
 {

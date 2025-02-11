@@ -1,4 +1,4 @@
-using BadgerClan.Api.Moves;
+using BadgerClan.Shared.Moves;
 using BadgerClan.Logic;
 using BadgerClan.Logic.Bot;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -25,25 +25,25 @@ app.UseHttpsRedirection();
 app.MapGet("/RunAndGun", (HttpContext context) =>
 {
     app.Logger.LogInformation("Received Run and Gun Activation Request");
-    Strategies.Strategy = "runandgun";
+    Strategies.currentStrat = "runandgun";
 });
 
 
 app.MapGet("/DoNothing", (HttpContext context) =>
 {
     app.Logger.LogInformation("Received Do Nothing Activation Request");
-    Strategies.Strategy = "";
+    Strategies.currentStrat = "";
 });
 
 app.MapGet("/RunAway", (HttpContext context) =>
 {
     app.Logger.LogInformation("Received Run Away Activation Request");
-    Strategies.Strategy = "runaway";
+    Strategies.currentStrat = "runaway";
 });
 app.MapGet("/ReGroup", (HttpContext context) =>
 {
     app.Logger.LogInformation("Received Run Away Activation Request");
-    Strategies.Strategy = "regroup";
+    Strategies.currentStrat = "regroup";
 });
 
 app.MapGet("/",(HttpContext context) => "Hello World");
@@ -53,7 +53,7 @@ app.MapPost("/", (MoveRequest request) =>
     app.Logger.LogInformation("Received move request for game {gameId} turn {turnNumber}", request.GameId, request.TurnNumber);
     var moves = new List<Move>();
 
-    switch (Strategies.Strategy)
+    switch (Strategies.currentStrat)
     {
         case "runandgun":
             Strategies.RunAndGun(request, moves);

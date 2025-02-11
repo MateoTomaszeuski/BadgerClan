@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace BadgerClan.MAUI
+namespace BadgerClan.MAUI.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

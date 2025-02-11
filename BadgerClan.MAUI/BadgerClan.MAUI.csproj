@@ -65,9 +65,14 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.67.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="protobuf-net.Grpc" Version="1.2.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\BadgerClan.gRPC.Shared\BadgerClan.Shared.csproj" />
 	</ItemGroup>
 
 </Project>
