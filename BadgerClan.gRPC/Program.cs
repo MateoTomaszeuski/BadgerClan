@@ -19,6 +19,8 @@ var app = builder.Build();
 
 app.MapGrpcService<StrategyService>();
 
+app.MapGet("/", () => "Mateo's gRPC API");
+
 app.MapPost("/", (MoveRequest request) =>
 {
     app.Logger.LogInformation("Received move request for game {gameId} turn {turnNumber}", request.GameId, request.TurnNumber);
