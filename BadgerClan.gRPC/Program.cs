@@ -10,11 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCodeFirstGrpc();
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2); // gRPC
-    options.ListenLocalhost(5001, o => o.Protocols = HttpProtocols.Http1); // REST
-});
 var app = builder.Build();
 
 app.MapGrpcService<StrategyService>();
