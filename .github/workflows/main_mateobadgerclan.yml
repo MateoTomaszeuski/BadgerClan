@@ -1,0 +1,95 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - mateobadgerclan1
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-rest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: dotnet publish
+        run: dotnet publish BadgerClan.Api -c Release -o ${{env.DOTNET_ROOT}}/myrestapi
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-rest-api
+          path: ${{env.DOTNET_ROOT}}/myrestapi
+
+  deploy-rest-1:
+    runs-on: ubuntu-latest
+    needs: build-rest
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-rest-api
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_985D3992DE044F61A7EA95C9BB51EC78 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_82B70C33F55F41338F94619CF72867F1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9376CA200AAB46498F1DBE64B71E9DFF }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'mateoBadgerClanRest1'
+          slot-name: 'Production'
+          package: .
+          
+  deploy-rest-2:
+    runs-on: ubuntu-latest
+    needs: build-rest
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-rest-api
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B6E94B6A42504324A915B64F8958BD1A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8FFF53B8928A40C38E330E6328F8BCF9 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_99433957F3ED4CFB87E164D260767907 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'mateoBadgerClanRest2'
+          slot-name: 'Production'
+          package: .
