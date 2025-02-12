@@ -69,7 +69,7 @@ public class ApiService() : IApiService
         if (api.ApiType == ApiType.gRPC)
         {
             var client = new StrategyService(api.ApiUrl);
-            var reply = await client.service.ChangeStrat(new StrategyRequest { Strategy = "regrup" });
+            var reply = await client.service.ChangeStrat(new StrategyRequest { Strategy = "regroup" });
             return reply.Message;
         }
         else

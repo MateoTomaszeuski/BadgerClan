@@ -27,5 +27,24 @@
         "DebugTarget": "Pixel 7 (Android 15.0 - API 35)"
       }
     ]
+  },
+  {
+    "Name": "App Server gRPC",
+    "Projects": [
+      {
+        "Path": "BadgerClan.Web\\BadgerClan.Web.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "BadgerClan.MAUI\\BadgerClan.MAUI.csproj",
+        "Action": "Start",
+        "DebugTarget": "Windows Machine"
+      },
+      {
+        "Path": "BadgerClan.gRPC\\BadgerClan.gRPC.csproj",
+        "Action": "Start"
+      }
+    ]
   }
 ]

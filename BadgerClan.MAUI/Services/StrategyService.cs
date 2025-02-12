@@ -10,7 +10,6 @@ internal class StrategyService : IDisposable
     private GrpcChannel channel;
     public IStrategyService service { get; set; }
     
-
     public StrategyService (string apiUrl)
     {
         GrpcClientFactory.AllowUnencryptedHttp2 = true;
@@ -19,6 +18,6 @@ internal class StrategyService : IDisposable
     }
     public void Dispose()
     {
-        throw new NotImplementedException();
+        channel.Dispose();
     }
 }
